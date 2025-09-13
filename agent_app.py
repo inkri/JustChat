@@ -1,5 +1,3 @@
-from fastapi import FastAPI
-from pydantic import BaseModel
 from transformers import AutoTokenizer, AutoModelForCausalLM, pipeline
 from langgraph.graph import StateGraph, END
 from typing import TypedDict
@@ -89,14 +87,8 @@ graph.add_edge("HANDLE_INPUT", END)
 app_graph = graph.compile()
 
 # -----------------------
-# FastAPI wrapper
+# Function to call from Gradio
 # -----------------------
-app = FastAPI()
-
-class Query(BaseModel):
-    prompt: str
-
-@app.post("/ask")
-def ask(query: Query):
-    final_state = app_graph.invoke({"user_input": query.prompt})
-    return {"answer": final_state["response"]}
+def ask(prompt: str) -> str:
+    final_state = app_graph.invoke({"user_input": prompt})
+    return final_state["response"]
