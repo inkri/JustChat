@@ -1,0 +1,6 @@
+fastapi
+uvicorn
+transformers
+datasets
+langgraph
+duckduckgo-search
