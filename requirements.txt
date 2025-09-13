@@ -1,6 +1,6 @@
-fastapi
-uvicorn
-transformers
-datasets
-langgraph
-duckduckgo-search
+gradio==3.44.0
+transformers==4.35.0
+torch==2.2.0
+datasets==2.13.2
+duckduckgo-search==0.6
+langgraph==0.1.7
