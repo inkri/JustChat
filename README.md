@@ -1,3 +1,4 @@
+----
 metadata
 title: Mechat
 emoji: 💬
@@ -11,3 +12,4 @@ hf_oauth: true
 hf_oauth_scopes:
   - inference-api
 short_description: mechat
+----
