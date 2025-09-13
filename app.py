@@ -11,7 +11,7 @@ iface = gr.Interface(
     fn=query_api,
     inputs=gr.Textbox(lines=2, placeholder="Ask me anything..."),
     outputs="text",
-    title="JustChat LLM Agent",
+    title="mechat",
     description="Ask questions to the model. Uses TinyLlama + RAG + Web Search."
 )
 

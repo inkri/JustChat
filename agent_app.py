@@ -1,7 +1,6 @@
 from transformers import AutoTokenizer, AutoModelForCausalLM, pipeline
 from langgraph.graph import StateGraph, END
 from typing import TypedDict
-from datasets import load_dataset
 from duckduckgo_search import ddg
 
 # -----------------------
@@ -22,15 +21,30 @@ generator = pipeline(
 )
 
 # -----------------------
-# Load dataset (SQuAD subset)
+# Dummy dataset (20 samples)
 # -----------------------
-dataset = load_dataset("squad", split="train[:500]")  # small subset for speed
-DATA_KB = []
-for item in dataset:
-    context = item.get("context", "")
-    question = item.get("question", "")
-    answers = item.get("answers", {}).get("text", [])
-    DATA_KB.append((context, question, answers))
+DATA_KB = [
+    ("The sky is blue.", "What color is the sky?", ["blue"]),
+    ("Water freezes at 0 degrees Celsius.", "At what temperature does water freeze?", ["0 degrees Celsius"]),
+    ("The capital of France is Paris.", "What is the capital of France?", ["Paris"]),
+    ("Python is a programming language.", "What is Python?", ["a programming language"]),
+    ("The Earth revolves around the Sun.", "What does the Earth revolve around?", ["the Sun"]),
+    ("Mount Everest is the highest mountain.", "Which is the highest mountain?", ["Mount Everest"]),
+    ("The Amazon River is in South America.", "Where is the Amazon River?", ["South America"]),
+    ("Light travels faster than sound.", "Which travels faster, light or sound?", ["light"]),
+    ("The Pacific Ocean is the largest ocean.", "Which is the largest ocean?", ["Pacific Ocean"]),
+    ("Albert Einstein developed the theory of relativity.", "Who developed the theory of relativity?", ["Albert Einstein"]),
+    ("The Great Wall of China is visible from space.", "What wall is visible from space?", ["The Great Wall of China"]),
+    ("Shakespeare wrote Hamlet.", "Who wrote Hamlet?", ["Shakespeare"]),
+    ("The human body has 206 bones.", "How many bones are in the human body?", ["206"]),
+    ("The speed of light is approximately 299,792 km/s.", "What is the speed of light?", ["299,792 km/s"]),
+    ("The Sahara is the largest desert in the world.", "Which is the largest desert?", ["Sahara"]),
+    ("Venus is the second planet from the Sun.", "Which planet is second from the Sun?", ["Venus"]),
+    ("The Mona Lisa was painted by Leonardo da Vinci.", "Who painted the Mona Lisa?", ["Leonardo da Vinci"]),
+    ("The Nile is the longest river in the world.", "Which is the longest river?", ["Nile"]),
+    ("The human heart has four chambers.", "How many chambers does the human heart have?", ["four"]),
+    ("The Statue of Liberty is in New York.", "Where is the Statue of Liberty?", ["New York"]),
+]
 
 # -----------------------
 # LangGraph state
